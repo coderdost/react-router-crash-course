@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -7,10 +7,10 @@ function App() {
     <div className="App">
       <ul>
         <li>
-          <Link to="/">Home </Link>
+          <NavLink exact to="/">Home </NavLink>
         </li>
         <li>
-          <Link to="/posts">Posts </Link>
+          <NavLink exact to="/posts">Posts </NavLink>
         </li>
       </ul>
       <Switch>

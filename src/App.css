@@ -1,0 +1,10 @@
+.active{
+    color: orange;
+    font-weight: bold;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
