@@ -23,21 +23,28 @@ function App() {
   );
 }
 
-function Posts() {
- 
+function Posts(props) {
   const [posts, setPosts] = useState([]);
 
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/posts').then(response=>{
-      response.json().then(data=>{
-        console.log(data);
-        setPosts(data.map(p=><div key={p.id}>
-          <Link  to={"/post/"+p.id}>   {p.id} : {p.title} </Link>
-          </div>))
-      })
-    })
-  },[])
+  const sendToPost = (id) => {
+    props.history.push('/post/' + id);
+  };
 
+  useEffect(() => {
+    console.log(props);
+    fetch('https://jsonplaceholder.typicode.com/posts').then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+        setPosts(
+          data.map((p) => (
+            <div key={p.id} onClick={(e) => sendToPost(p.id)}>
+              {p.id} : {p.title}
+            </div>
+          ))
+        );
+      });
+    });
+  }, []);
 
   return (
     <div>
@@ -47,20 +54,26 @@ function Posts() {
   );
 }
 
-function Post(){
-  const [post, setPost] = useState("");
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/posts/1').then(response=>{
-      response.json().then(data=>{
+function Post(props) {
+  const [post, setPost] = useState('');
+  useEffect(() => {
+    console.log(props);
+    fetch(
+      'https://jsonplaceholder.typicode.com/posts/' + props.match.params.id
+    ).then((response) => {
+      response.json().then((data) => {
         console.log(data);
         setPost(data.body);
-      })
-    })
-  },[])
+      });
+    });
+  }, []);
 
   return (
-    <h1>{post}</h1>
-  )
+    <div>
+      <button onClick={()=>{props.history.goBack()}}>Go Back</button>
+      <h1>{post}</h1>
+    </div>
+  );
 }
 
 function Home() {
