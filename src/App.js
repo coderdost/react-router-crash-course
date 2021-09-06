@@ -31,12 +31,12 @@ function Posts() {
     fetch('https://jsonplaceholder.typicode.com/posts').then(response=>{
       response.json().then(data=>{
         console.log(data);
-        setPosts(data.map(p=><div>
-          <Link to={"/post/"+p.id}>   {p.id} : {p.title} </Link>
+        setPosts(data.map(p=><div key={p.id}>
+          <Link  to={"/post/"+p.id}>   {p.id} : {p.title} </Link>
           </div>))
       })
     })
-  })
+  },[])
 
 
   return (
@@ -56,7 +56,8 @@ function Post(){
         setPost(data.body);
       })
     })
-  })
+  },[])
+
   return (
     <h1>{post}</h1>
   )
