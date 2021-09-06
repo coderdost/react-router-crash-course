@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Link, Switch, NavLink } from 'react-router-dom';
+import { Route, Link, Switch, NavLink, Redirect } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -79,6 +79,7 @@ function Post(props) {
 function Home() {
   return (
     <div>
+      <Redirect to="/posts"></Redirect>
       <h1>Home</h1>
     </div>
   );
